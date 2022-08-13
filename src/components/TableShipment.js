@@ -49,7 +49,7 @@ function TableShipment() {
             data.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.shipment_number}</TableCell>
-                <TableCell>{row.license}</TableCell>
+                <TableCell>{row.truck?.license_type}</TableCell>
                 <TableCell>{row.driver?.name}</TableCell>
                 <TableCell>{row.origin?.name}</TableCell>
                 <TableCell>{row.destination?.name}</TableCell>
