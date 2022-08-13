@@ -6,23 +6,23 @@ import { Container, Button, Grid, Paper, TextField } from "@mui/material";
 // components
 import Header from "../components/Header";
 import Copyright from "../components/Copyright";
-import TableShipment from "../components/TableShipment";
-import AddShipment from "../components/AddShipment/AddShipment";
+import DriverTable from "../components/TableDriver/DriverTable";
+import AddDriver from "../components/AddDriver/AddDriver";
 
-const ShipmentList = () => {
-  const [shipmentForm, setShipmentForm] = useState(false);
-  const openHandler = () => {
-    setShipmentForm(true);
-  };
+const DriverList = () => {
+const [truckForm, setTruckForm] = useState(false)
+const openHandler = () => {
+    setTruckForm(true)
+}
 
-  const closeHandler = () => {
-    setShipmentForm(false);
-  };
+const closeHandler = () => {
+    setTruckForm(false)
+}
 
   return (
     <>
       <Header />
-      <AddShipment formOpen={shipmentForm} closeForm={closeHandler}/>
+        <AddDriver formOpen={truckForm} closeForm={closeHandler}/>
       {/* Body */}
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
@@ -36,7 +36,7 @@ const ShipmentList = () => {
                 marginBottom: 2,
               }}
             >
-              <Button onClick={openHandler} variant="contained">Add Shipment</Button>
+              <Button onClick={openHandler} variant="contained">Add Driver</Button>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -52,7 +52,7 @@ const ShipmentList = () => {
           {/* Recent TableShipment */}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              <TableShipment />
+              <DriverTable />
             </Paper>
           </Grid>
         </Grid>
@@ -63,4 +63,4 @@ const ShipmentList = () => {
     </>
   );
 };
-export default ShipmentList;
+export default DriverList;

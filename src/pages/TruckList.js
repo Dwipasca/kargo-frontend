@@ -15,9 +15,9 @@ const openHandler = () => {
     setTruckForm(true)
 }
 
-const closeHandler = () => [
+const closeHandler = () => {
     setTruckForm(false)
-]
+}
 
   return (
     <>
