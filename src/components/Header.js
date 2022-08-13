@@ -14,11 +14,15 @@ import {
   MenuItem,
 } from "@mui/material";
 
+import { useNavigate } from "react-router-dom";
+
 // icons
 import AdbIcon from "@mui/icons-material/Adb";
 import MenuIcon from "@mui/icons-material/Menu";
 
 function Header() {
+  const navigate = useNavigate();
+
   const pages = ["Transporter", "Shipper"];
   const settings = ["Logout"];
 
@@ -37,7 +41,7 @@ function Header() {
   };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    navigate(`/`);
   };
 
   return (
