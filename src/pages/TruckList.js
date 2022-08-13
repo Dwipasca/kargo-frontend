@@ -10,19 +10,21 @@ import TruckTable from "../components/Table Trucks/TruckTable";
 import AddTruck from "../components/AddTruck/AddTruck";
 
 const TruckList = () => {
-const [truckForm, setTruckForm] = useState(false)
-const openHandler = () => {
+  const [changeFlag, setChangeFlag] = useState(0)
+  const [truckForm, setTruckForm] = useState(false)
+  const openHandler = () => {
     setTruckForm(true)
-}
+  }
 
-const closeHandler = () => [
+  const closeHandler = () => {
+    setChangeFlag(prev => prev + 1);
     setTruckForm(false)
-]
+  }
 
   return (
     <>
       <Header />
-        <AddTruck formOpen={truckForm} closeForm={closeHandler}/>
+      <AddTruck formOpen={truckForm} closeForm={closeHandler} />
       {/* Body */}
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
@@ -52,7 +54,7 @@ const closeHandler = () => [
           {/* Recent TableShipment */}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              <TruckTable />
+              <TruckTable changeFlag={changeFlag} />
             </Paper>
           </Grid>
         </Grid>

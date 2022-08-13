@@ -4,12 +4,15 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import classes from './Addtruck.module.css';
+import axios from "axios";
 
 const AddTruck = (props) => {
+  const [license, setLicense] = useState('');
+  const [productionYear, setProductionYear] = useState('');
   const [plateType, setPlateType] = useState("Yellow");
   const [truckType, setTruckType] = useState("Tronton");
-  const plateList = ["Yellow", "Black", "White", "Red"];
-  const truckList = ["Tronton", "Band Van"]
+  const plateList = ["Yellow", "Black"];
+  const truckList = ["Tronton", "Container", "CDE"]
 
   const plateHandler = (event) => {
     setPlateType(event.target.value);
@@ -22,14 +25,31 @@ const AddTruck = (props) => {
     props.closeForm()
   };
 
+  const submitHandler = (e) => {
+    const data = new FormData();
+    data.append('license_number', license);
+    data.append('license_type', plateType);
+    data.append('truck_type', truckType);
+    data.append('production_year', productionYear);
+
+    axios.post("http://127.0.0.1:8000/api/add-truck", data)
+      .then((response) => {
+        console.log(response.data.message);
+        handleClose();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
-    <div>
+    <form onSubmit={submitHandler}>
       <Modal
         open={props.formOpen}
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
-        style={{display:'flex',alignItems:'center',justifyContent:'center'}}
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
         <div className={classes['modal-card']}>
           <h2>Add New Truck</h2>
@@ -37,8 +57,9 @@ const AddTruck = (props) => {
             required
             id="license-number"
             label="License Number"
-            defaultValue="B xxxx AEF"
-            style={{margin: '1rem 0'}}
+            value={license}
+            onChange={(e) => setLicense(e.target.value)}
+            style={{ margin: '1rem 0' }}
           />
           <TextField
             id="plate-type"
@@ -46,7 +67,7 @@ const AddTruck = (props) => {
             label="Plate Type"
             value={plateType}
             onChange={plateHandler}
-            style={{margin: '1rem 0'}}
+            style={{ margin: '1rem 0' }}
           >
             {plateList.map((option) => (
               <MenuItem key={option} value={option}>
@@ -60,7 +81,7 @@ const AddTruck = (props) => {
             label="Truck Type"
             value={truckType}
             onChange={truckHandler}
-            style={{margin: '1rem 0'}}
+            style={{ margin: '1rem 0' }}
           >
             {truckList.map((option) => (
               <MenuItem key={option} value={option}>
@@ -72,13 +93,14 @@ const AddTruck = (props) => {
             required
             id="production-year"
             label="Production year"
-            defaultValue="2022"
-            style={{margin: '1rem 0'}}
+            value={productionYear}
+            onChange={(e) => setProductionYear(e.target.value)}
+            style={{ margin: '1rem 0' }}
           />
-          <Button onClick={handleClose} variant="contained" style={{width: "10rem", marginLeft: "auto"}}>Save Unit</Button>
+          <Button onClick={submitHandler} variant="contained" style={{ width: "10rem", marginLeft: "auto" }} type="submit">Save Unit</Button>
         </div>
       </Modal>
-    </div>
+    </form>
   );
 };
 
