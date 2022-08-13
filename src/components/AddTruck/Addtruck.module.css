@@ -1,0 +1,17 @@
+.modal-card {
+    background: white;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding: 2rem 3rem;
+    border-radius: 5px;
+}
+
+.modal-card h1 {
+    margin: 1rem;
+}
+
+.modal-card TextField {
+    margin: 2rem;
+}

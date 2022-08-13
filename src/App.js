@@ -1,8 +1,8 @@
-import ShipmentList from "./pages/ShipmentList";
+import TruckList from "./pages/TruckList";
 function App() {
   return (
     <>
-      <ShipmentList />
+      <TruckList />
     </>
   );
 }
