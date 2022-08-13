@@ -26,8 +26,6 @@ function TableShipment() {
     return <p>Fetching Data...</p>;
   }
 
-  console.log(data);
-
   return (
     <>
       <Title>Shipment</Title>

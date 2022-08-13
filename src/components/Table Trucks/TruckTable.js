@@ -11,7 +11,6 @@ import useFetch from "../../hooks/useFetch";
 
 // components
 import Title from "../Title";
-import TruckData from "./TruckData";
 
 const TruckTable = (props) => {
   const { data, loading, error, fetch } = useFetch(
