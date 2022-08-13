@@ -6,16 +6,20 @@ import { Container, Button, Grid, Paper, TextField } from "@mui/material";
 // components
 import Header from "../components/Header";
 import Copyright from "../components/Copyright";
-import TableTrucks from "../components/TableTrucks";
+import TruckTable from "../components/Table Trucks/TruckTable";
 import AddTruck from "../components/AddTruck/AddTruck";
 
 const TruckList = () => {
-  const [truckForm, setTruckForm] = useState(false);
+  const [changeFlag, setChangeFlag] = useState(0)
+  const [truckForm, setTruckForm] = useState(false)
   const openHandler = () => {
-    setTruckForm(true);
-  };
+    setTruckForm(true)
+  }
 
-  const closeHandler = () => [setTruckForm(false)];
+  const closeHandler = () => {
+    setChangeFlag(prev => prev + 1);
+    setTruckForm(false)
+  }
 
   return (
     <>
@@ -34,9 +38,7 @@ const TruckList = () => {
                 marginBottom: 2,
               }}
             >
-              <Button onClick={openHandler} variant="contained">
-                Add Truck
-              </Button>
+              <Button onClick={openHandler} variant="contained">Add Truck</Button>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -49,10 +51,10 @@ const TruckList = () => {
             </Grid>
           </Grid>
 
-          {/* Recent TableTrucks */}
+          {/* Recent TableShipment */}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              <TableTrucks />
+              <TruckTable changeFlag={changeFlag} />
             </Paper>
           </Grid>
         </Grid>

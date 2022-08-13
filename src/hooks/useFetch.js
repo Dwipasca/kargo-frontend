@@ -6,11 +6,13 @@ export default function useFetch(url) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const fetch = () => {
     (async function () {
       try {
         setLoading(true);
         const response = await axios.get(url);
+
+        console.log(response.data);
         setData(response.data);
       } catch (err) {
         setError(err);
@@ -18,7 +20,11 @@ export default function useFetch(url) {
         setLoading(false);
       }
     })();
+  };
+
+  useEffect(() => {
+    fetch();
   }, [url]);
 
-  return { data, error, loading };
+  return { data, error, loading, fetch };
 }
